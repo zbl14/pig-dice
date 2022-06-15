@@ -1,13 +1,18 @@
 function PigDice(name) {
   this.name = name
+  this.diceRoll = 0
   this.currentScore = 0;
 }
 
 PigDice.prototype.addScore = function() {
-  let score = Math.floor(Math.random() * 6) + 1;
+  let score = Math.trunc(Math.random() * 6) + 1;
   if (score !== 1) {
-    this.currentScore = this.currentScore + score;
-  } 
+    this.currentScore += score;
+  } else {
+    this.diceRoll = 1
+    alert ("Your turn is over")
+    return this.diceRoll
+  }
 }
 
 
