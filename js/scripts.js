@@ -3,18 +3,24 @@ function PigDice(name) {
   this.diceRoll = 0
   this.turnTotal = 0
   this.currentOverallScore = 0;
+  this.activePlayer = "active"; 
 }
 
 PigDice.prototype.roll = function() {
-  let score = Math.trunc(Math.random() * 6) + 1;
-  if (score !== 1) {
-    this.turnTotal += score;
-    console.log('this.turnTotal: ', this.turnTotal);
-    console.log('score', score);
+  if (this.activePlayer === "active") {
+    let score = Math.trunc(Math.random() * 6) + 1;
+    if (score !== 1) {
+      this.turnTotal += score;
+      console.log('this.turnTotal: ', this.turnTotal);
+      console.log('score', score);
+    } else {
+      this.diceRoll = 1
+      this.activePlayer = "inactive";
+      alert ("Your turn is over")
+      return this.diceRoll
+    }
   } else {
-    this.diceRoll = 1
-    alert ("Your turn is over")
-    return this.diceRoll
+    alert ("It's not your turn yet!")
   }
 }
 
@@ -26,6 +32,10 @@ PigDice.prototype.hold = function () {
   if (this.currentOverallScore >= 100) {
     alert ("Your win!")
   } 
+}
+
+PigDice.prototype.swtich = function () {
+
 }
 
 let player1 = new PigDice("Ben")
