@@ -14,24 +14,25 @@ PigDice.prototype.roll = function() {
       console.log('this.turnTotal: ', this.turnTotal);
       console.log('score', score);
     } else {
-      this.diceRoll = 1
+      this.diceRoll = 1;
+      this.turnTotal = 0;
       this.activePlayer = "inactive";
-      alert ("Your turn is over")
-      return this.diceRoll
+      alert ("Your turn is over");
+      return this.diceRoll;
     }
   } else {
-    alert ("It's not your turn yet!")
+    alert ("It's not your turn yet!");
   }
 }
 
 PigDice.prototype.hold = function () {
-  this.currentOverallScore += this.turnTotal
+  this.currentOverallScore += this.turnTotal;
   console.log('this.currentOverallScore: ', this.currentOverallScore);
-  this.turnTotal = 0
-  console.log('this.turnTotal: ', this.turnTotal)
+  this.turnTotal = 0;
+  console.log('this.turnTotal: ', this.turnTotal);
   this.activePlayer = "inactive";
   if (this.currentOverallScore >= 100) {
-    alert ("Your win!")
+    alert ("Your win!");
   } 
 }
 
@@ -43,8 +44,8 @@ PigDice.prototype.switch = function () {
   }
 }
 
-let player1 = new PigDice("Ben", 'active')
-let player2 = new PigDice("kyle", 'inactive')
+let player1 = new PigDice("Ben", 'active');
+let player2 = new PigDice("kyle", 'inactive');
 
 // function attachContactListeners() {
 //   $("#rollByOne").on("click", function() {

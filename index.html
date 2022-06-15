@@ -8,14 +8,38 @@
   <title>Pig Dice</title>
 </head>
 <body>
-  <form class="form-group">
-    <div>
-      <label for="player1Name">Player 1 Name</label>
-      <input type="text"  class="form-control" id="play1Name">
+  <div class="allPlayersContainer">
+    <div class="player1-container">
+      <div id="player1-results">
+        <p>Player 1: <span class="player1Name"></span></p>
+        <p>Player 1 current turn score: <span class="player1TurnTotal"></span></p>
+        <p>Player 1 current overall score: <span class="player1OverallScore"></span></p>
+      </div>
+      <button id="rollByOne">Player 1 Roll</button>
     </div>
-    <div>
-      <label for="player2Name">Player 2 Name</label>
-      <input type="text"  class="form-control" id="play2Name">
+    <div class="player2-container">
+      <div id="player2-results">
+        <p>Player 2: <span class="player2Name"></span></p>
+        <p>Player 2 current turn score: <span class="player2TurnTotal"></span></p>
+        <p>Player 2 current overall score: <span class="player2OverallScore"></span></p>
+      </div>
+      <button id="rollByTwo">Player 2 Roll</button>
+    </div>
+  </div>
+
+  <form id="newPlayer" class="form-group">
+    <div class="internal-form-container">
+      <div class="input-container">
+        <label for="player1Name">Player 1 Name</label>
+        <input type="text"  class="form-control" id="play1Name">
+      </div>
+      <div class="input-container">
+        <label for="player2Name">Player 2 Name</label>
+        <input type="text"  class="form-control" id="play2Name">
+      </div>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="btn-primary">Submit</button>
     </div>
   </form>
 </body>

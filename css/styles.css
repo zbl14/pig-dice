@@ -1,0 +1,27 @@
+* {
+  /* border: 1px solid red; */
+}
+
+.internal-form-container, .button-container, .allPlayersContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.player1-container, .player2-container {
+  width: 30%;
+  margin: 1rem;
+  border: 2px solid #333;
+  padding: 1rem;
+}
+
+.input-container {
+  width: 30%;
+  margin: 1rem;
+}
+
+button {
+  display: block;
+  width: 9rem;
+  height: 3rem;
+}
