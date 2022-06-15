@@ -5,7 +5,7 @@ function PigDice(name) {
   this.currentOverallScore = 0;
 }
 
-PigDice.prototype.addScore = function() {
+PigDice.prototype.roll = function() {
   let score = Math.trunc(Math.random() * 6) + 1;
   if (score !== 1) {
     this.turnTotal += score;
