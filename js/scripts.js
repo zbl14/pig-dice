@@ -5,27 +5,40 @@ function PigDice(name) {
 
 PigDice.prototype.addScore = function() {
   let score = Math.floor(Math.random() * 6) + 1;
-  if (score === 1) {
-    this.currentScore = this.currentScore;
-  } else {
+  if (score !== 1) {
     this.currentScore = this.currentScore + score;
-  }
+  } 
 }
 
 
+// function attachContactListeners() {
+//   $("#rollByOne").on("click", function() {
+//     player1.addScore();
+//     let player1Score = player1.currentScore
+//     console.log(player1Score);
+//   });
+//   $("#rollByTwo").on("click", function() {
+//     player2.addScore();
+//     console.log(player2.currentScore)
+//   });
+// }
 
 $(document).ready(function() {
-  attachContactListeners(); 
-  $("form#new-contact").submit(function(event) {
+  // attachContactListeners(); 
+  $("form#newPlayer").submit(function(event) {
     event.preventDefault();
-    const player1Name = $("input#player1Name").val();
-    const player2Name = $("input#player2Name").val();
-    const player1Score =;
-    const player2Score =;
-    let player1 = new PigDice(player1Name);
-    let player2 = new PigDice(player1Name);
-    player1.addScore();
-    player2.addScore();
-  });
+    const playerName = $("input#player1Name").val();
+
+    let player = new PigDice(playerName);
+
+    let player1Score = player1.currentScore
+
+    $(".player1Name").html(player1.name);
+
+    $("#rollByOne").on("click", function() {
+      player1.addScore();
+      console.log(player1Score);
+    });
+    });
 });
 
