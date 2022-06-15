@@ -2,7 +2,7 @@
   border: 1px solid red;
 } */
 
-.internal-form-container, .button-container, .allPlayersContainer {
+.internal-form-container, .button-container, .allPlayersContainer, .flex-center-container {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -25,3 +25,23 @@ button {
   width: 9rem;
   height: 3rem;
 }
+
+.victory-message-container {
+  position: fixed;
+  background-color: aquamarine;
+  width: 80%;
+  padding: 3rem;
+
+
+}
+
+.victory-message {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+.hidden {display: none;}

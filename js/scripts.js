@@ -120,6 +120,7 @@ $(document).ready(function() {
 // COMPLETED: Display the current roll
 // COMPLETED: Reset the app after a player wins
 // WIP:--> Pop up victory message
+// ----> Include the name of whoever wins in the victory message
 // Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
 // Move victory-check into roll function
 // Clear indication of which player is currently the active player
