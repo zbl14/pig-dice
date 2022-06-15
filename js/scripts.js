@@ -35,8 +35,29 @@ PigDice.prototype.hold = function () {
   this.currentOverallScore += this.turnTotal;
   this.turnTotal = 0;
   this.switch();
-  if (this.currentOverallScore >= 100) {
-    alert ("Your win!");
+  if (this.currentOverallScore >= 10) {
+    console.log("You win!");
+
+    player1Instance.name = "";
+    player1Instance.diceRoll = 0;
+    player1Instance.turnTotal = 0;
+    player1Instance.currentOverallScore = 0;
+    player1Instance.activePlayer = "active";
+    $(".player1Name").html(player1Instance.name);
+    $(".player1CurrentRoll").html(player1Instance.diceRoll);
+    $(".player1TurnTotal").html(player1Instance.turnTotal); 
+    $(".player1OverallScore").html(player1Instance.currentOverallScore); 
+
+    player2Instance.name = "";
+    player2Instance.diceRoll = 0;
+    player2Instance.turnTotal = 0;
+    player2Instance.currentOverallScore = 0;
+    player2Instance.activePlayer = "inactive";
+    $(".player2Name").html(player2Instance.name);
+    $(".player2CurrentRoll").html(player2Instance.diceRoll);
+    $(".player2TurnTotal").html(player2Instance.turnTotal); 
+    $(".player2OverallScore").html(player2Instance.currentOverallScore); 
+
   } 
 }
 
@@ -96,7 +117,9 @@ $(document).ready(function() {
   });
 })
 
-// Display the current roll
-// Reset the app after a player wins
-// --> Pop up victory message
+// COMPLETED: Display the current roll
+// COMPLETED: Reset the app after a player wins
+// WIP:--> Pop up victory message
 // Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
+// Move victory-check into roll function
+// Clear indication of which player is currently the active player
