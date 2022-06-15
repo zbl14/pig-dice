@@ -29,16 +29,22 @@ PigDice.prototype.hold = function () {
   console.log('this.currentOverallScore: ', this.currentOverallScore);
   this.turnTotal = 0
   console.log('this.turnTotal: ', this.turnTotal)
+  this.activePlayer = "inactive";
   if (this.currentOverallScore >= 100) {
     alert ("Your win!")
   } 
 }
 
-PigDice.prototype.swtich = function () {
-
+PigDice.prototype.switch = function () {
+  if (this.activePlayer === "inactive") {
+    console.log("checked");
+    this.activePlayer = "active";
+    console.log("checked");
+  }
 }
 
-let player1 = new PigDice("Ben")
+let player1 = new PigDice("Ben", 'active')
+let player2 = new PigDice("kyle", 'inactive')
 
 // function attachContactListeners() {
 //   $("#rollByOne").on("click", function() {

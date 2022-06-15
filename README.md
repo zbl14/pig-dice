@@ -43,6 +43,14 @@ player1.hold();\
 player1;\
 Expected Output: PigDice {name: 'Ben', diceRoll: 0, turnTotal: 0, currentOverallScore: 10}
 
+```sh
+Describe PigDice.prototype.switch = function()
+```
+Test: "It should acitve a player if he/she was inactive"\
+Code:\
+player1.switch();\
+player1;\
+Expected Output: PigDice {name: 'Ben', diceRoll: 1, turnTotal: 32, currentOverallScore: 0, activePlayer: 'active'}
 
 
 
