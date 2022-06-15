@@ -1,6 +1,6 @@
-* {
-  /* border: 1px solid red; */
-}
+/* * {
+  border: 1px solid red;
+} */
 
 .internal-form-container, .button-container, .allPlayersContainer {
   display: flex;
