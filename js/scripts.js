@@ -17,8 +17,9 @@ PigDice.prototype.roll = function() {
     } else {
       this.diceRoll = 1;
       this.turnTotal = 0;
-      //*** */ this.switch();
-      // this.activePlayer = "inactive";
+
+      this.switch();
+
       alert ("Your turn is over");
       return this.diceRoll;
     }
@@ -32,63 +33,83 @@ PigDice.prototype.hold = function () {
   console.log('this.currentOverallScore: ', this.currentOverallScore);
   this.turnTotal = 0;
   console.log('this.turnTotal: ', this.turnTotal);
-  //*** */ this.switch();
-  // this.activePlayer = "inactive";
-  if (this.currentOverallScore >= 100) {
+
+  this.switch();
+
+  if (this.currentOverallScore >= 10) {
     alert ("Your win!");
   } 
 }
 
 PigDice.prototype.switch = function () {
-  if (this.activePlayer === "inactive") {
-    console.log("checked");
-    this.activePlayer = "active";
-    console.log("checked");
+  let currentlyActivePlayer;
+  let currentlyWaitingPlayer;
+
+  if (player1Instance.activePlayer === "active") {
+    currentlyActivePlayer = player1Instance;
+    currentlyWaitingPlayer = player2Instance;
+  } else {
+    currentlyActivePlayer = player2Instance;
+    currentlyWaitingPlayer = player1Instance;
   }
+
+  currentlyActivePlayer.activePlayer = "inactive";
+  currentlyWaitingPlayer.activePlayer = "active";
+
 }
+
+let player1Instance = new PigDice("player1Name", "active");
+let player2Instance = new PigDice("player2Name", "inactive");
+
+// player1Instance.name;
+// player1Instance.activePlayer;
 
 //UI Logics
 $(document).ready(function() {
+
   $("form#newPlayer").submit(function(event) {
     event.preventDefault();
     let player1Name = $("input#player1Name").val();
     let player2Name = $("input#player2Name").val();
-    let player1 = new PigDice(player1Name, "active");
-    let player2 = new PigDice(player2Name, "inactive");
-    $(".player1Name").html(player1.name);
-    $(".player2Name").html(player2.name);
-    $(".player1TurnTotal").html(player1.turnTotal);
-    $(".player1OverallScore").html(player1.currentOverallScore);
-    $(".player2TurnTotal").html(player2.turnTotal);
-    $(".player2OverallScore").html(player2.currentOverallScore);
+
+    player1Instance.name = player1Name;
+    player2Instance.name = player2Name;
+
+    $(".player1Name").html(player1Instance.name);
+    $(".player2Name").html(player2Instance.name);
+    $(".player1TurnTotal").html(player1Instance.turnTotal);
+    $(".player1OverallScore").html(player1Instance.currentOverallScore);
+    $(".player2TurnTotal").html(player2Instance.turnTotal);
+    $(".player2OverallScore").html(player2Instance.currentOverallScore);
  
     $('#rollByOne').click(function() { 
-      // if (player2.activePlayer === "inactive") {
-        // console.log(player1.activePlayer, player2.activePlayer )
-        // player1.switch();
-        // console.log(player1.activePlayer, player2.activePlayer )
-        player1.roll(); 
-        // console.log(player1.activePlayer, player2.activePlayer )
-        $(".player1TurnTotal").html(player1.turnTotal); 
-      // }
+
+        player1Instance.roll(); 
+
+        $(".player1TurnTotal").html(player1Instance.turnTotal); 
+
     });
     $('#rollByTwo').click(function() {
-      // if (player1.activePlayer === "inactive") {
-        // player2.switch();
-        player2.roll(); 
-      $(".player2TurnTotal").html(player2.turnTotal); 
-      // } 
+
+
+        player2Instance.roll(); 
+      $(".player2TurnTotal").html(player2Instance.turnTotal); 
+
     });
     $('#holdByOne').click(function() { 
-      // console.log(player1.activePlayer, player2.activePlayer )
-      player1.hold();
-      // console.log(player1.activePlayer, player2.activePlayer )
-      $(".player1OverallScore").html(player1.currentOverallScore); 
+
+      player1Instance.hold();
+
+      $(".player1OverallScore").html(player1Instance.currentOverallScore); 
     });
     $('#holdByTwo').click(function() { 
-      player2.hold();
-      $(".player2OverallScore").html(player2.currentOverallScore); 
+      player2Instance.hold();
+      $(".player2OverallScore").html(player2Instance.currentOverallScore); 
     });
   });
 })
 
+// Display the current roll
+// Reset the app after a player wins
+// --> Pop up victory message
+// Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
