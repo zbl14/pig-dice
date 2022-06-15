@@ -25,7 +25,17 @@ Expected Output: PigDice {name: 'Ben', diceRoll: 1, turnTotal: 5, currentOveral
 ```sh
 Describe PigDice.prototype.hold = function()
 ```
-Test: "It should add turnTotal to currentOverAll if hold the score
+Test: "It should add turnTotal to currentOverallScore if hold the score"\
+Code:\
+player1.hold();\
+player1;\
+Expected Output: PigDice {name: 'Ben', diceRoll: 0, turnTotal: 2, currentOverallScore: 2}
+
+Test: "It should alert you win if currentOverallScore >= 100"\
+Code:\
+player1.hold();\
+player1;\
+Expected Output: 
 
 
 
