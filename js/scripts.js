@@ -7,19 +7,22 @@ function PigDice(name, activePlayer) {
   this.activePlayer = activePlayer; 
 }
 
+let player1Instance = new PigDice("player1Name", "active");
+let player2Instance = new PigDice("player2Name", "inactive");
+
 PigDice.prototype.roll = function() {
   if (this.activePlayer === "active") {
     let score = Math.trunc(Math.random() * 6) + 1;
     if (score !== 1) {
+      this.diceRoll = score;
+      console.log(this.diceRoll)
       this.turnTotal += score;
-      console.log('this.turnTotal: ', this.turnTotal);
-      console.log('score', score);
+      return this.diceRoll;
     } else {
       this.diceRoll = 1;
+      console.log(this.diceRoll)
       this.turnTotal = 0;
-
       this.switch();
-
       alert ("Your turn is over");
       return this.diceRoll;
     }
@@ -30,13 +33,9 @@ PigDice.prototype.roll = function() {
 
 PigDice.prototype.hold = function () {
   this.currentOverallScore += this.turnTotal;
-  console.log('this.currentOverallScore: ', this.currentOverallScore);
   this.turnTotal = 0;
-  console.log('this.turnTotal: ', this.turnTotal);
-
   this.switch();
-
-  if (this.currentOverallScore >= 10) {
+  if (this.currentOverallScore >= 100) {
     alert ("Your win!");
   } 
 }
@@ -44,7 +43,6 @@ PigDice.prototype.hold = function () {
 PigDice.prototype.switch = function () {
   let currentlyActivePlayer;
   let currentlyWaitingPlayer;
-
   if (player1Instance.activePlayer === "active") {
     currentlyActivePlayer = player1Instance;
     currentlyWaitingPlayer = player2Instance;
@@ -52,54 +50,43 @@ PigDice.prototype.switch = function () {
     currentlyActivePlayer = player2Instance;
     currentlyWaitingPlayer = player1Instance;
   }
-
   currentlyActivePlayer.activePlayer = "inactive";
   currentlyWaitingPlayer.activePlayer = "active";
-
 }
 
-let player1Instance = new PigDice("player1Name", "active");
-let player2Instance = new PigDice("player2Name", "inactive");
+
 
 // player1Instance.name;
 // player1Instance.activePlayer;
 
 //UI Logics
 $(document).ready(function() {
-
   $("form#newPlayer").submit(function(event) {
     event.preventDefault();
     let player1Name = $("input#player1Name").val();
     let player2Name = $("input#player2Name").val();
-
     player1Instance.name = player1Name;
     player2Instance.name = player2Name;
-
     $(".player1Name").html(player1Instance.name);
     $(".player2Name").html(player2Instance.name);
-    $(".player1TurnTotal").html(player1Instance.turnTotal);
-    $(".player1OverallScore").html(player1Instance.currentOverallScore);
-    $(".player2TurnTotal").html(player2Instance.turnTotal);
-    $(".player2OverallScore").html(player2Instance.currentOverallScore);
- 
+    // $(".player1CurrentRoll").html(player1Instance.diceRoll);
+    // $(".player2CurrentRoll").html(player2Instance.diceRoll);
+    // $(".player1TurnTotal").html(player1Instance.turnTotal);
+    // $(".player1OverallScore").html(player1Instance.currentOverallScore);
+    // $(".player2TurnTotal").html(player2Instance.turnTotal);
+    // $(".player2OverallScore").html(player2Instance.currentOverallScore);
     $('#rollByOne').click(function() { 
-
-        player1Instance.roll(); 
-
-        $(".player1TurnTotal").html(player1Instance.turnTotal); 
-
+      player1Instance.roll(); 
+      $(".player1TurnTotal").html(player1Instance.turnTotal); 
+      $(".player1CurrentRoll").html(player1Instance.diceRoll);
     });
     $('#rollByTwo').click(function() {
-
-
-        player2Instance.roll(); 
-      $(".player2TurnTotal").html(player2Instance.turnTotal); 
-
+      player2Instance.roll(); 
+      $(".player2TurnTotal").html(player2Instance.turnTotal);
+      $(".player2CurrentRoll").html(player2Instance.diceRoll); 
     });
     $('#holdByOne').click(function() { 
-
       player1Instance.hold();
-
       $(".player1OverallScore").html(player1Instance.currentOverallScore); 
     });
     $('#holdByTwo').click(function() { 
