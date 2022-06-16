@@ -1,8 +1,8 @@
 // Business Logics
 function PigDice(name, activePlayer) {
-  this.name = name
-  this.diceRoll = 0
-  this.turnTotal = 0
+  this.name = name;
+  this.diceRoll = 0;
+  this.turnTotal = 0;
   this.currentOverallScore = 0;
   this.activePlayer = activePlayer; 
 }
@@ -16,17 +16,17 @@ PigDice.prototype.roll = function() {
     let score = Math.trunc(Math.random() * 6) + 1;
     if (score !== 1) {
       this.diceRoll = score;
-      console.log(this.diceRoll)
+      console.log(this.diceRoll);
       this.turnTotal += score;
-      return this.diceRoll;
+      // return this.diceRoll;
     } else {
       this.diceRoll = 1;
-      console.log(this.diceRoll)
+      console.log(this.diceRoll);
       this.turnTotal = 0;
       this.switch();
       disableArea ();
       alert ("Your turn is over");
-      return this.diceRoll;
+      // return this.diceRoll;
     }
   } else {
     alert ("It's not your turn yet!");
@@ -37,29 +37,6 @@ PigDice.prototype.hold = function () {
   this.currentOverallScore += this.turnTotal;
   this.turnTotal = 0;
   this.switch();
-  // if (this.currentOverallScore >= targetedScore) {
-  //   console.log("You win!");
-    // reset();
-    // player1Instance.name = "";
-    // player1Instance.diceRoll = 0;
-    // player1Instance.turnTotal = 0;
-    // player1Instance.currentOverallScore = 0;
-    // player1Instance.activePlayer = "active";
-    // $(".player1Name").html(player1Instance.name);
-    // $(".player1CurrentRoll").html(player1Instance.diceRoll);
-    // $(".player1TurnTotal").html(player1Instance.turnTotal); 
-    // $(".player1OverallScore").html(player1Instance.currentOverallScore); 
-
-    // player2Instance.name = "";
-    // player2Instance.diceRoll = 0;
-    // player2Instance.turnTotal = 0;
-    // player2Instance.currentOverallScore = 0;
-    // player2Instance.activePlayer = "inactive";
-    // $(".player2Name").html(player2Instance.name);
-    // $(".player2CurrentRoll").html(player2Instance.diceRoll);
-    // $(".player2TurnTotal").html(player2Instance.turnTotal); 
-    // $(".player2OverallScore").html(player2Instance.currentOverallScore); 
-  // } 
 }
 
 PigDice.prototype.switch = function () {
@@ -68,28 +45,15 @@ PigDice.prototype.switch = function () {
   if (player1Instance.activePlayer === "active") {
     currentlyActivePlayer = player1Instance;
     currentlyWaitingPlayer = player2Instance;
-    // $(".player1-container").toggleClass("active-player-background");
-    // $(".player2-container").toggleClass("active-player-background");
-
-
   } else {
     currentlyActivePlayer = player2Instance;
     currentlyWaitingPlayer = player1Instance;
   }
   currentlyActivePlayer.activePlayer = "inactive";
   currentlyWaitingPlayer.activePlayer = "active";
-  
-
-  // $(".player1-container").toggleClass("waiting-player-background");
-  // $(".player2-container").toggleClass("active-player-background");
-
 console.log('currentlyActivePlayer: ', currentlyActivePlayer);
-console.log('currentlyWaitingPlayer: ', currentlyWaitingPlayer);
-  
+console.log('currentlyWaitingPlayer: ', currentlyWaitingPlayer); 
 }
-
-// player1Instance.name;
-// player1Instance.activePlayer;
 
 //UI Logics
 function reset() {
@@ -118,15 +82,9 @@ function disableArea () {
   }
 }
 
-
-
-
 $(document).ready(function() {
   $("form#newPlayer").submit(function(event) {
     event.preventDefault();
-    // $(".player1-container").addClass("active-player-background");
-    // $(".player2-container").addClass("waiting-player-background");
-    
     let player1Name = $("input#player1Name").val();
     let player2Name = $("input#player2Name").val();
     player1Instance.name = player1Name;
@@ -134,29 +92,15 @@ $(document).ready(function() {
     $(".player1Name").html(player1Instance.name);
     $(".player2Name").html(player2Instance.name);
     $("#newPlayer").hide();
-    // $(".player1CurrentRoll").html(player1Instance.diceRoll);
-    // $(".player2CurrentRoll").html(player2Instance.diceRoll);
-    // $(".player1TurnTotal").html(player1Instance.turnTotal);
-    // $(".player1OverallScore").html(player1Instance.currentOverallScore);
-    // $(".player2TurnTotal").html(player2Instance.turnTotal);
-    // $(".player2OverallScore").html(player2Instance.currentOverallScore);
-    
+
     $(".roll").click(function(){
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
         disableArea ()
         player1Instance.roll(); 
         $(".player1CurrentRoll").html(player1Instance.diceRoll);
         $(".player1TurnTotal").html(player1Instance.turnTotal);
-       
-        // $(".player1-container").toggleClass("active-player-background");
-        // $(".player1-container").toggleClass("waiting-player-background");
-        // $(".player2-container").toggleClass("waiting-player-background");
-        // $(".player2-container").toggleClass("active-player-background");
-                
-        
         if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
           console.log("You win!");
-          
           $("#victory-message-super-container").show();
           $(".winner").text(player1Instance.name);
           reset();
@@ -166,14 +110,34 @@ $(document).ready(function() {
         player2Instance.roll(); 
         $(".player2CurrentRoll").html(player2Instance.diceRoll);
         $(".player2TurnTotal").html(player2Instance.turnTotal);
-   
-        // player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active"
-    
-        // if turnTotal=0 , remove class, add class
-
         if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
           console.log("You win!");
-          
+          $("#victory-message-super-container").show();
+          $(".winner").text(player2Instance.name);
+          reset();
+        } 
+      }
+    });
+
+    $(".computer-game-roll").click(function(){
+      if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+        disableArea ()
+        player1Instance.roll(); 
+        $(".player1CurrentRoll").html(player1Instance.diceRoll);
+        $(".player1TurnTotal").html(player1Instance.turnTotal);
+        if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
+          console.log("You win!");
+          $("#victory-message-super-container").show();
+          $(".winner").text(player1Instance.name);
+          reset();
+        } 
+      } else {
+        disableArea ()
+        player2Instance.roll(); 
+        $(".player2CurrentRoll").html(player2Instance.diceRoll);
+        $(".player2TurnTotal").html(player2Instance.turnTotal);
+        if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
+          console.log("You win!");
           $("#victory-message-super-container").show();
           $(".winner").text(player2Instance.name);
           reset();
@@ -186,65 +150,18 @@ $(document).ready(function() {
         player1Instance.hold();
         disableArea ()
         $(".player1OverallScore").html(player1Instance.currentOverallScore);
-        
-    //     $(".player1-container").toggleClass("active-player-background");
-    //     $(".player1-container").toggleClass("waiting-player-background");
-    //     $(".player2-container").toggleClass("waiting-player-background");
-    //     $(".player2-container").toggleClass("active-player-background");
-    //  ;
-        //remove class , add class 
-
-        // if (player1Instance.currentOverallScore >= targetedScore) {
-        //   console.log("You win!");
-        //   reset();
-        //   $(".hidden").show();
-        // }
+        console.log(player1Instance.activePlayer, player2Instance.activePlayer);
+        if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active" && computer-enabled-status === true) {
+          player2Instance.roll();
+          player2Instance.roll();
+          player2Instance.hold();
+        }
       } else {
         player2Instance.hold();
         disableArea ()
         $(".player2OverallScore").html(player2Instance.currentOverallScore); 
-        
-        // $(".player1-container").removeClass("waiting-player-background");
-        // $(".player2-container").removeClass("active-player-background");
-        // $(".player1-container").addClass("active-player-background");
-        // $(".player2-container").addClass("waiting-player-background");
-        // if (player2Instance.currentOverallScore >= targetedScore) {
-        //   console.log("You win!");
-        //   reset();
-        //   $(".hidden").show();
-        // }
       }
     });
-
-    // $(".rollByOne").click(function() { 
-    //   player1Instance.roll(); 
-    //   $(".player1CurrentRoll").html(player1Instance.diceRoll);
-    //   $(".player1TurnTotal").html(player1Instance.turnTotal); 
-    // });
-    // $(".holdByOne").click(function() { 
-    //   player1Instance.hold();
-    //   $(".player1OverallScore").html(player1Instance.currentOverallScore);
-    //   if (player1Instance.currentOverallScore >= targetedScore) {
-    //     console.log("You win!");
-    //     reset();
-    //     $(".hidden").show();
-    //   }
-    // });
-    // $(".rollByTwo").click(function() {
-    //   player2Instance.roll(); 
-    //   $(".player2CurrentRoll").html(player2Instance.diceRoll);
-    //   $(".player2TurnTotal").html(player2Instance.turnTotal);
-    // });
-    // $(".holdByTwo").click(function() { 
-    //   player2Instance.hold();
-    //   $(".player2OverallScore").html(player2Instance.currentOverallScore); 
-    //   if (player2Instance.currentOverallScore >= targetedScore) {
-    //     console.log("You win!");
-    //     reset();
-    //     $(".hidden").show();
-    //   }
-    // });
-
   });
 })
 
@@ -256,3 +173,21 @@ $(document).ready(function() {
 // COMPLETED: Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
 // COMPLETED: victory-check into roll function
 // COMPLETED: Clear indication of which player is currently the active player
+
+
+// Computer Player Brainstorming
+// UI:
+// - Button to choose a computer player instead of proceeding with a human player 2.
+// - Buttons to choose easy computer mode or hard computer mode
+
+// Logic to Activate Computer Player
+// User clicks activation button
+// Javascript removes player 2? Or makes the computer automate player 2's existing actions?
+
+
+// Business Logic
+// Comptuer Player 
+// - Easy Mode
+// --- Computer rolls twice, no matter what, then HOLD
+// - Hard Mode
+// --- If turnTotal is greater than 6 --> HOLD
