@@ -9,7 +9,7 @@ function PigDice(name, activePlayer) {
 
 let player1Instance = new PigDice("player1Name", "active");
 let player2Instance = new PigDice("player2Name", "inactive");
-let targetedScore = 10;
+let targetedScore = 15;
 
 PigDice.prototype.roll = function() {
   if (this.activePlayer === "active") {
@@ -24,6 +24,7 @@ PigDice.prototype.roll = function() {
       console.log(this.diceRoll)
       this.turnTotal = 0;
       this.switch();
+      disableArea ();
       alert ("Your turn is over");
       return this.diceRoll;
     }
@@ -67,13 +68,23 @@ PigDice.prototype.switch = function () {
   if (player1Instance.activePlayer === "active") {
     currentlyActivePlayer = player1Instance;
     currentlyWaitingPlayer = player2Instance;
+    // $(".player1-container").toggleClass("active-player-background");
+    // $(".player2-container").toggleClass("active-player-background");
+
+
   } else {
     currentlyActivePlayer = player2Instance;
     currentlyWaitingPlayer = player1Instance;
   }
   currentlyActivePlayer.activePlayer = "inactive";
   currentlyWaitingPlayer.activePlayer = "active";
+  
 
+  // $(".player1-container").toggleClass("waiting-player-background");
+  // $(".player2-container").toggleClass("active-player-background");
+
+console.log('currentlyActivePlayer: ', currentlyActivePlayer);
+console.log('currentlyWaitingPlayer: ', currentlyWaitingPlayer);
   
 }
 
@@ -97,9 +108,25 @@ function reset() {
   });
 }
 
+function disableArea () {
+  if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+    $(".player1-container").addClass("active-player-background");
+    $(".player2-container").removeClass("active-player-background");
+  } else {
+    $(".player1-container").removeClass("active-player-background");
+    $(".player2-container").addClass("active-player-background");
+  }
+}
+
+
+
+
 $(document).ready(function() {
   $("form#newPlayer").submit(function(event) {
     event.preventDefault();
+    // $(".player1-container").addClass("active-player-background");
+    // $(".player2-container").addClass("waiting-player-background");
+    
     let player1Name = $("input#player1Name").val();
     let player2Name = $("input#player2Name").val();
     player1Instance.name = player1Name;
@@ -113,21 +140,33 @@ $(document).ready(function() {
     // $(".player1OverallScore").html(player1Instance.currentOverallScore);
     // $(".player2TurnTotal").html(player2Instance.turnTotal);
     // $(".player2OverallScore").html(player2Instance.currentOverallScore);
-
+    
     $(".roll").click(function(){
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+        disableArea ()
         player1Instance.roll(); 
         $(".player1CurrentRoll").html(player1Instance.diceRoll);
         $(".player1TurnTotal").html(player1Instance.turnTotal);
+       
+        // $(".player1-container").toggleClass("active-player-background");
+        // $(".player1-container").toggleClass("waiting-player-background");
+        // $(".player2-container").toggleClass("waiting-player-background");
+        // $(".player2-container").toggleClass("active-player-background");
+                
+        
         if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
           console.log("You win!");
           reset();
           $("#victory-message-super-container").show();
         } 
-      } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
+      } else {
+        disableArea ()
         player2Instance.roll(); 
         $(".player2CurrentRoll").html(player2Instance.diceRoll);
         $(".player2TurnTotal").html(player2Instance.turnTotal);
+   
+        // player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active"
+    
         // if turnTotal=0 , remove class, add class
 
         if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
@@ -141,7 +180,14 @@ $(document).ready(function() {
     $(".hold").click(function(){
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
         player1Instance.hold();
+        disableArea ()
         $(".player1OverallScore").html(player1Instance.currentOverallScore);
+        
+    //     $(".player1-container").toggleClass("active-player-background");
+    //     $(".player1-container").toggleClass("waiting-player-background");
+    //     $(".player2-container").toggleClass("waiting-player-background");
+    //     $(".player2-container").toggleClass("active-player-background");
+    //  ;
         //remove class , add class 
 
         // if (player1Instance.currentOverallScore >= targetedScore) {
@@ -149,9 +195,15 @@ $(document).ready(function() {
         //   reset();
         //   $(".hidden").show();
         // }
-      } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
+      } else {
         player2Instance.hold();
+        disableArea ()
         $(".player2OverallScore").html(player2Instance.currentOverallScore); 
+        
+        // $(".player1-container").removeClass("waiting-player-background");
+        // $(".player2-container").removeClass("active-player-background");
+        // $(".player1-container").addClass("active-player-background");
+        // $(".player2-container").addClass("waiting-player-background");
         // if (player2Instance.currentOverallScore >= targetedScore) {
         //   console.log("You win!");
         //   reset();

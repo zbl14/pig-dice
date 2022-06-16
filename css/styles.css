@@ -2,13 +2,28 @@
   border: 1px solid red;
 } */
 
-.internal-form-container, .button-container, .allPlayersContainer, .flex-center-container {
+.flex-center-container {
   display: flex;
   justify-content: center;
   width: 100%;
 }
+.position-relative {
+  position: relative;
+}
+.position-absolute {
+  position: absolute;
+}
+.position-fixed {
+  position: fixed;
+}
 
+.active-player-background {
+  background-color: green;
+}
 
+.waiting-player-background {
+ background: red;
+}
 
 .player1-container, .player2-container {
   width: 30%;
@@ -32,10 +47,8 @@
 
 #victory-message-super-container {
   position: relative;
-  /* border: 2px solid greenyellow; */
   display: none;
   width: 100vw;
-  /* padding: 3rem; */
 }
 
 .victory-message-container {
@@ -72,15 +85,7 @@
   color: #ffffff;
 }
 
-.position-relative {
-  position: relative;
-}
-.position-absolute {
-  position: absolute;
-}
-.position-fixed {
-  position: fixed;
-}
+
 
 /* .hidden {
   display: none;
