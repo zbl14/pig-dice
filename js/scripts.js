@@ -110,34 +110,68 @@ $(document).ready(function() {
     // $(".player1OverallScore").html(player1Instance.currentOverallScore);
     // $(".player2TurnTotal").html(player2Instance.turnTotal);
     // $(".player2OverallScore").html(player2Instance.currentOverallScore);
-    $('.rollByOne').click(function() { 
-      player1Instance.roll(); 
-      $(".player1CurrentRoll").html(player1Instance.diceRoll);
-      $(".player1TurnTotal").html(player1Instance.turnTotal); 
-    });
-    $('.rollByTwo').click(function() {
-      player2Instance.roll(); 
-      $(".player2CurrentRoll").html(player2Instance.diceRoll);
-      $(".player2TurnTotal").html(player2Instance.turnTotal);
-    });
-    $('.holdByOne').click(function() { 
-      player1Instance.hold();
-      $(".player1OverallScore").html(player1Instance.currentOverallScore);
-      if (player1Instance.currentOverallScore >= 10) {
-        console.log("You win!");
-        reset();
-        $(".hidden").show();
+
+    $(".roll").click(function(){
+      if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+        player1Instance.roll(); 
+        $(".player1CurrentRoll").html(player1Instance.diceRoll);
+        $(".player1TurnTotal").html(player1Instance.turnTotal); 
+      } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
+        player2Instance.roll(); 
+        $(".player2CurrentRoll").html(player2Instance.diceRoll);
+        $(".player2TurnTotal").html(player2Instance.turnTotal);
       }
     });
-    $('.holdByTwo').click(function() { 
-      player2Instance.hold();
-      $(".player2OverallScore").html(player2Instance.currentOverallScore); 
-      if (player2Instance.currentOverallScore >= 10) {
-        console.log("You win!");
-        reset();
-        $(".hidden").show();
+
+    $(".hold").click(function(){
+      if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+        player1Instance.hold();
+        $(".player1OverallScore").html(player1Instance.currentOverallScore);
+        if (player1Instance.currentOverallScore >= 10) {
+          console.log("You win!");
+          reset();
+          $(".hidden").show();
+        }
+      } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
+        player2Instance.hold();
+        $(".player2OverallScore").html(player2Instance.currentOverallScore); 
+        if (player2Instance.currentOverallScore >= 10) {
+          console.log("You win!");
+          reset();
+          $(".hidden").show();
+        }
       }
     });
+
+    // $(".rollByOne").click(function() { 
+    //   player1Instance.roll(); 
+    //   $(".player1CurrentRoll").html(player1Instance.diceRoll);
+    //   $(".player1TurnTotal").html(player1Instance.turnTotal); 
+    // });
+    // $(".holdByOne").click(function() { 
+    //   player1Instance.hold();
+    //   $(".player1OverallScore").html(player1Instance.currentOverallScore);
+    //   if (player1Instance.currentOverallScore >= 10) {
+    //     console.log("You win!");
+    //     reset();
+    //     $(".hidden").show();
+    //   }
+    // });
+    // $(".rollByTwo").click(function() {
+    //   player2Instance.roll(); 
+    //   $(".player2CurrentRoll").html(player2Instance.diceRoll);
+    //   $(".player2TurnTotal").html(player2Instance.turnTotal);
+    // });
+    // $(".holdByTwo").click(function() { 
+    //   player2Instance.hold();
+    //   $(".player2OverallScore").html(player2Instance.currentOverallScore); 
+    //   if (player2Instance.currentOverallScore >= 10) {
+    //     console.log("You win!");
+    //     reset();
+    //     $(".hidden").show();
+    //   }
+    // });
+
   });
 })
 
