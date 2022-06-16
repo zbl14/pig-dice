@@ -9,6 +9,7 @@ function PigDice(name, activePlayer) {
 
 let player1Instance = new PigDice("player1Name", "active");
 let player2Instance = new PigDice("player2Name", "inactive");
+let targetedScore = 10;
 
 PigDice.prototype.roll = function() {
   if (this.activePlayer === "active") {
@@ -35,7 +36,7 @@ PigDice.prototype.hold = function () {
   this.currentOverallScore += this.turnTotal;
   this.turnTotal = 0;
   this.switch();
-  // if (this.currentOverallScore >= 10) {
+  // if (this.currentOverallScore >= targetedScore) {
   //   console.log("You win!");
     // reset();
     // player1Instance.name = "";
@@ -72,6 +73,8 @@ PigDice.prototype.switch = function () {
   }
   currentlyActivePlayer.activePlayer = "inactive";
   currentlyWaitingPlayer.activePlayer = "active";
+
+  
 }
 
 // player1Instance.name;
@@ -116,19 +119,21 @@ $(document).ready(function() {
         player1Instance.roll(); 
         $(".player1CurrentRoll").html(player1Instance.diceRoll);
         $(".player1TurnTotal").html(player1Instance.turnTotal);
-        if (player1Instance.turnTotal+player1Instance.currentOverallScore>=10) {
+        if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
           console.log("You win!");
           reset();
-          $(".hidden").show();
+          $("#victory-message-super-container").show();
         } 
       } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
         player2Instance.roll(); 
         $(".player2CurrentRoll").html(player2Instance.diceRoll);
         $(".player2TurnTotal").html(player2Instance.turnTotal);
-        if (player2Instance.turnTotal+player2Instance.currentOverallScore>=10) {
+        // if turnTotal=0 , remove class, add class
+
+        if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
           console.log("You win!");
           reset();
-          $(".hidden").show();
+          $("#victory-message-super-container").show();
         } 
       }
     });
@@ -137,7 +142,9 @@ $(document).ready(function() {
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
         player1Instance.hold();
         $(".player1OverallScore").html(player1Instance.currentOverallScore);
-        // if (player1Instance.currentOverallScore >= 10) {
+        //remove class , add class 
+
+        // if (player1Instance.currentOverallScore >= targetedScore) {
         //   console.log("You win!");
         //   reset();
         //   $(".hidden").show();
@@ -145,7 +152,7 @@ $(document).ready(function() {
       } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
         player2Instance.hold();
         $(".player2OverallScore").html(player2Instance.currentOverallScore); 
-        // if (player2Instance.currentOverallScore >= 10) {
+        // if (player2Instance.currentOverallScore >= targetedScore) {
         //   console.log("You win!");
         //   reset();
         //   $(".hidden").show();
@@ -161,7 +168,7 @@ $(document).ready(function() {
     // $(".holdByOne").click(function() { 
     //   player1Instance.hold();
     //   $(".player1OverallScore").html(player1Instance.currentOverallScore);
-    //   if (player1Instance.currentOverallScore >= 10) {
+    //   if (player1Instance.currentOverallScore >= targetedScore) {
     //     console.log("You win!");
     //     reset();
     //     $(".hidden").show();
@@ -175,7 +182,7 @@ $(document).ready(function() {
     // $(".holdByTwo").click(function() { 
     //   player2Instance.hold();
     //   $(".player2OverallScore").html(player2Instance.currentOverallScore); 
-    //   if (player2Instance.currentOverallScore >= 10) {
+    //   if (player2Instance.currentOverallScore >= targetedScore) {
     //     console.log("You win!");
     //     reset();
     //     $(".hidden").show();
