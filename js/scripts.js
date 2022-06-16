@@ -9,7 +9,7 @@ function PigDice(name, activePlayer) {
 
 let player1Instance = new PigDice("player1Name", "active");
 let player2Instance = new PigDice("player2Name", "inactive");
-let targetedScore = 15;
+let targetedScore = 10;
 
 PigDice.prototype.roll = function() {
   if (this.activePlayer === "active") {
@@ -156,8 +156,10 @@ $(document).ready(function() {
         
         if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
           console.log("You win!");
-          reset();
+          
           $("#victory-message-super-container").show();
+          $(".winner").text(player1Instance.name);
+          reset();
         } 
       } else {
         disableArea ()
@@ -171,8 +173,10 @@ $(document).ready(function() {
 
         if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
           console.log("You win!");
-          reset();
+          
           $("#victory-message-super-container").show();
+          $(".winner").text(player2Instance.name);
+          reset();
         } 
       }
     });
@@ -247,8 +251,8 @@ $(document).ready(function() {
 // COMPLETED: Hide the form after submitting
 // COMPLETED: Display the current roll
 // COMPLETED: Reset the app after a player wins
-// WIP:--> Pop up victory message
+// COMPLETED: Pop up victory message
 // ----> Include the name of whoever wins in the victory message
-// WIP: --> Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
-// COMPLETED victory-check into roll function
-// Clear indication of which player is currently the active player
+// COMPLETED: Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
+// COMPLETED: victory-check into roll function
+// COMPLETED: Clear indication of which player is currently the active player
