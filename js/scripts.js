@@ -115,11 +115,21 @@ $(document).ready(function() {
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
         player1Instance.roll(); 
         $(".player1CurrentRoll").html(player1Instance.diceRoll);
-        $(".player1TurnTotal").html(player1Instance.turnTotal); 
+        $(".player1TurnTotal").html(player1Instance.turnTotal);
+        if (player1Instance.turnTotal+player1Instance.currentOverallScore>=10) {
+          console.log("You win!");
+          reset();
+          $(".hidden").show();
+        } 
       } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
         player2Instance.roll(); 
         $(".player2CurrentRoll").html(player2Instance.diceRoll);
         $(".player2TurnTotal").html(player2Instance.turnTotal);
+        if (player2Instance.turnTotal+player2Instance.currentOverallScore>=10) {
+          console.log("You win!");
+          reset();
+          $(".hidden").show();
+        } 
       }
     });
 
@@ -127,19 +137,19 @@ $(document).ready(function() {
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
         player1Instance.hold();
         $(".player1OverallScore").html(player1Instance.currentOverallScore);
-        if (player1Instance.currentOverallScore >= 10) {
-          console.log("You win!");
-          reset();
-          $(".hidden").show();
-        }
+        // if (player1Instance.currentOverallScore >= 10) {
+        //   console.log("You win!");
+        //   reset();
+        //   $(".hidden").show();
+        // }
       } else if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active") {
         player2Instance.hold();
         $(".player2OverallScore").html(player2Instance.currentOverallScore); 
-        if (player2Instance.currentOverallScore >= 10) {
-          console.log("You win!");
-          reset();
-          $(".hidden").show();
-        }
+        // if (player2Instance.currentOverallScore >= 10) {
+        //   console.log("You win!");
+        //   reset();
+        //   $(".hidden").show();
+        // }
       }
     });
 
@@ -180,6 +190,6 @@ $(document).ready(function() {
 // COMPLETED: Reset the app after a player wins
 // WIP:--> Pop up victory message
 // ----> Include the name of whoever wins in the victory message
-// Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
-// Move victory-check into roll function
+// WIP: --> Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
+// COMPLETED victory-check into roll function
 // Clear indication of which player is currently the active player
