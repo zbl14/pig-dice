@@ -1,4 +1,3 @@
-// Business Logics
 function PigDice(name, activePlayer) {
   this.name = name;
   this.diceRoll = 0;
@@ -54,6 +53,7 @@ PigDice.prototype.switch = function () {
 console.log('currentlyActivePlayer: ', currentlyActivePlayer);
 console.log('currentlyWaitingPlayer: ', currentlyWaitingPlayer); 
 }
+
 
 //UI Logics
 function reset() {
@@ -119,31 +119,32 @@ $(document).ready(function() {
       }
     });
 
-    $(".computer-game-roll").click(function(){
-      if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
-        disableArea ()
-        player1Instance.roll(); 
-        $(".player1CurrentRoll").html(player1Instance.diceRoll);
-        $(".player1TurnTotal").html(player1Instance.turnTotal);
-        if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
-          console.log("You win!");
-          $("#victory-message-super-container").show();
-          $(".winner").text(player1Instance.name);
-          reset();
-        } 
-      } else {
-        disableArea ()
-        player2Instance.roll(); 
-        $(".player2CurrentRoll").html(player2Instance.diceRoll);
-        $(".player2TurnTotal").html(player2Instance.turnTotal);
-        if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
-          console.log("You win!");
-          $("#victory-message-super-container").show();
-          $(".winner").text(player2Instance.name);
-          reset();
-        } 
-      }
-    });
+    // WIP: computer mode 
+    // $(".computer-game-roll").click(function(){
+    //   if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+    //     disableArea ()
+    //     player1Instance.roll(); 
+    //     $(".player1CurrentRoll").html(player1Instance.diceRoll);
+    //     $(".player1TurnTotal").html(player1Instance.turnTotal);
+    //     if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
+    //       console.log("You win!");
+    //       $("#victory-message-super-container").show();
+    //       $(".winner").text(player1Instance.name);
+    //       reset();
+    //     } 
+    //   } else {
+    //     disableArea ()
+    //     player2Instance.roll(); 
+    //     $(".player2CurrentRoll").html(player2Instance.diceRoll);
+    //     $(".player2TurnTotal").html(player2Instance.turnTotal);
+    //     if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
+    //       console.log("You win!");
+    //       $("#victory-message-super-container").show();
+    //       $(".winner").text(player2Instance.name);
+    //       reset();
+    //     } 
+    //   }
+    // });
 
     $(".hold").click(function(){
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
@@ -164,16 +165,6 @@ $(document).ready(function() {
     });
   });
 })
-
-// COMPLETED: Hide the form after submitting
-// COMPLETED: Display the current roll
-// COMPLETED: Reset the app after a player wins
-// COMPLETED: Pop up victory message
-// ----> Include the name of whoever wins in the victory message
-// COMPLETED: Support 1 roll button and 1 hold button (switches user behind the scenes automatically)
-// COMPLETED: victory-check into roll function
-// COMPLETED: Clear indication of which player is currently the active player
-
 
 // Computer Player Brainstorming
 // UI:
