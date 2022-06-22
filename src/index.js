@@ -4,17 +4,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import'./css/styles.css';
 import $ from 'jquery';
 
+let player1Instance = new PigDice("player1Name", "active");
+let player2Instance = new PigDice("player2Name", "inactive");
+let targetedScore = 10;
+
 function reset() {
   let thePlayers = [player1Instance, player2Instance];
   thePlayers.forEach(function(player) {
-      player.name = "";
-      player.diceRoll = 0;
-      player.turnTotal = 0;
-      player.currentOverallScore = 0;
-  })
+    player.name = "";
+    player.diceRoll = 0;
+    player.turnTotal = 0;
+    player.currentOverallScore = 0;
+  });
   player1Instance.activePlayer = "active";
   player2Instance.activePlayer = "inactive";
-  let resetOuput = [$(".player1Name"), $(".player1CurrentRoll"), $(".player1TurnTotal"), $(".player1OverallScore"), $(".player2Name"), $(".player2CurrentRoll"), $(".player2TurnTotal"), $(".player2OverallScore")]
+  let resetOuput = [$(".player1Name"), $(".player1CurrentRoll"), $(".player1TurnTotal"), $(".player1OverallScore"), $(".player2Name"), $(".player2CurrentRoll"), $(".player2TurnTotal"), $(".player2OverallScore")];
   resetOuput.forEach(function(output){
     output.html("");
   });
@@ -43,7 +47,7 @@ $(document).ready(function() {
 
     $(".roll").click(function(){
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
-        disableArea ()
+        disableArea ();
         player1Instance.roll(); 
         $(".player1CurrentRoll").html(player1Instance.diceRoll);
         $(".player1TurnTotal").html(player1Instance.turnTotal);
@@ -54,7 +58,7 @@ $(document).ready(function() {
           reset();
         } 
       } else {
-        disableArea ()
+        disableArea ();
         player2Instance.roll(); 
         $(".player2CurrentRoll").html(player2Instance.diceRoll);
         $(".player2TurnTotal").html(player2Instance.turnTotal);
@@ -67,52 +71,50 @@ $(document).ready(function() {
       }
     });
 
-    // WIP: computer mode 
-    // $(".computer-game-roll").click(function(){
-    //   if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
-    //     disableArea ()
-    //     player1Instance.roll(); 
-    //     $(".player1CurrentRoll").html(player1Instance.diceRoll);
-    //     $(".player1TurnTotal").html(player1Instance.turnTotal);
-    //     if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
-    //       console.log("You win!");
-    //       $("#victory-message-super-container").show();
-    //       $(".winner").text(player1Instance.name);
-    //       reset();
-    //     } 
-    //   } else {
-    //     disableArea ()
-    //     player2Instance.roll(); 
-    //     $(".player2CurrentRoll").html(player2Instance.diceRoll);
-    //     $(".player2TurnTotal").html(player2Instance.turnTotal);
-    //     if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
-    //       console.log("You win!");
-    //       $("#victory-message-super-container").show();
-    //       $(".winner").text(player2Instance.name);
-    //       reset();
-    //     } 
-    //   }
-    // });
-
     $(".hold").click(function(){
       if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
         player1Instance.hold();
-        disableArea ()
+        disableArea ();
         $(".player1OverallScore").html(player1Instance.currentOverallScore);
+        // player1Instance.switch();
         console.log(player1Instance.activePlayer, player2Instance.activePlayer);
-        if (player1Instance.activePlayer === "inactive" && player2Instance.activePlayer === "active" && computer-enabled-status === true) {
-          player2Instance.roll();
-          player2Instance.roll();
-          player2Instance.hold();
-        }
       } else {
         player2Instance.hold();
-        disableArea ()
+        disableArea ();
         $(".player2OverallScore").html(player2Instance.currentOverallScore); 
       }
     });
   });
-})
+});
+
+
+// WIP: computer mode 
+// $(".computer-game-roll").click(function(){
+//   if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+//     disableArea ()
+//     player1Instance.roll(); 
+//     $(".player1CurrentRoll").html(player1Instance.diceRoll);
+//     $(".player1TurnTotal").html(player1Instance.turnTotal);
+//     if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
+//       console.log("You win!");
+//       $("#victory-message-super-container").show();
+//       $(".winner").text(player1Instance.name);
+//       reset();
+//     } 
+//   } else {
+//     disableArea ()
+//     player2Instance.roll(); 
+//     $(".player2CurrentRoll").html(player2Instance.diceRoll);
+//     $(".player2TurnTotal").html(player2Instance.turnTotal);
+//     if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
+//       console.log("You win!");
+//       $("#victory-message-super-container").show();
+//       $(".winner").text(player2Instance.name);
+//       reset();
+//     } 
+//   }
+// });
+
 
 // Computer Player Brainstorming
 // UI:
