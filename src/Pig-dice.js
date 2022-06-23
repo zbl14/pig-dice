@@ -1,67 +1,53 @@
-export function PigDice(name, activePlayer) {
+export function PigDice(name) {
   this.name = name;
   this.diceRoll = 0;
   this.turnTotal = 0;
   this.currentOverallScore = 0;
-  this.activePlayer = activePlayer; 
+  this.activePlayer = 0; 
 }
 
-// function randomNum () {
-//   return Math.trunc(Math.random() * 6) + 1;
-// };
-
-// let randomNum = randomNum ();
-
-PigDice.prototype.roll = function(randomNum) {
-  if (this.activePlayer === "active") {
-    // let randomNum = Math.trunc(Math.random() * 6) + 1;
-    if (randomNum !== 1) {
-      this.diceRoll = randomNum;
-      console.log(this.diceRoll);
-      this.turnTotal += randomNum;
-      return this.diceRoll;
-    } else {
-      this.diceRoll = 1;
-      console.log(this.diceRoll);
-      this.turnTotal = 0;
-      // this.switch(); // this.activePlayer === "inactive";
-      // disableArea ();
-      return "Your turn is over";
-      // return this.diceRoll;
-    }
+PigDice.prototype.roll = function() {
+  let randomNum = Math.trunc(Math.random() * 6) + 1;
+  if (randomNum !== 1) {
+    this.diceRoll = randomNum;
+    this.turnTotal += randomNum;
+    return this.diceRoll
   } else {
-    return "It's not your turn yet!";
+    this.diceRoll = 1;
+    this.turnTotal = 0;
+    this.activePlayer = 1;
+    return this.diceRoll
   }
 };
-
 
 PigDice.prototype.hold = function () {
   this.currentOverallScore += this.turnTotal;
+  this.diceRoll = 0;
   this.turnTotal = 0;
+  this.activePlayer = 1;
   return this.currentOverallScore
-  // this.switch();
+};
+
+PigDice.prototype.enable = function() {
+  this.activePlayer = 0;
 };
 
 // player1Instance
-let player1Instance = new PigDice("player1Name", "active");
-let player2Instance = new PigDice("player2Name", "inactive");
+// let player1Instance = new PigDice("player1Name", "active");
+// let player2Instance = new PigDice("player2Name", "inactive");
 
-PigDice.prototype.switch = function () {
-  let currentlyActivePlayer;
-  let currentlyWaitingPlayer;
-  if (player1Instance.activePlayer === "active") {
-    currentlyActivePlayer = player1Instance;
-    currentlyWaitingPlayer = player2Instance;
-  } else {
-    currentlyActivePlayer = player2Instance;
-    currentlyWaitingPlayer = player1Instance;
-  }
-  currentlyActivePlayer.activePlayer = "inactive";
-  currentlyWaitingPlayer.activePlayer = "active";
-  console.log('currentlyActivePlayer: ', currentlyActivePlayer);
-  console.log('currentlyWaitingPlayer: ', currentlyWaitingPlayer); 
-};
-
-// PigDice.prototype.switch = function() {
-//   activePlayer = this.turnTotal === 0 ? "inactive" : "active"
+// PigDice.prototype.switch = function () {
+//   let currentlyActivePlayer;
+//   let currentlyWaitingPlayer;
+//   if (player1Instance.activePlayer === "active") {
+//     currentlyActivePlayer = player1Instance;
+//     currentlyWaitingPlayer = player2Instance;
+//   } else {
+//     currentlyActivePlayer = player2Instance;
+//     currentlyWaitingPlayer = player1Instance;
+//   }
+//   currentlyActivePlayer.activePlayer = "inactive";
+//   currentlyWaitingPlayer.activePlayer = "active";
+//   console.log('currentlyActivePlayer: ', currentlyActivePlayer);
+//   console.log('currentlyWaitingPlayer: ', currentlyWaitingPlayer); 
 // };
