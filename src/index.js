@@ -1,4 +1,4 @@
-import { PigDice } from './Pig-dice.js';
+import { PigDice } from './../src/js/pig-dice.js';
 import "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import'./css/styles.css';
