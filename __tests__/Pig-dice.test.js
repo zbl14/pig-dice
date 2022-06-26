@@ -16,6 +16,21 @@ describe('PigDice', () => {
   expect(player1.activePlayer).toEqual(0);  
   })
 
+  test('should return a number between 1-6',() => {
+    expect(player1.randomNum()).toBeGreaterThanOrEqual(1);
+    expect(player1.randomNum()).toBeLessThanOrEqual(6);
+  });
+
+  test('should return 1 for diceRoll, 0 for turnTotal, if roll a 1', () => {
+    player1.roll();
+    console.log("hi", player1.diceRoll);
+    if (player1.roll() === 6) {
+      console.log(player1.diceRoll);
+      expect(player1.diceRoll).toEqual(1);
+      expect(player1.turnTotal).toEqual(0);
+    }
+  });
+
   test('should return 2 for both diceRoll and turnTotal, if roll a 2', () => {
     player1.roll();
     if (player1.roll() === 2) {
@@ -24,13 +39,16 @@ describe('PigDice', () => {
     }
   });
 
-  test('should return 1 for diceRoll, 0 for turnTotal, if roll a 1', () => {
+  test('should return 0 for turnTotal, if roll a 2 then roll a 1', () => {
     player1.roll();
-    if (player1.roll() === 1) {
-      expect(player1.diceRoll).toEqual(1);
-      expect(player1.turnTotal).toEqual(0);
+    if (player1.roll() === 2) {
+      player1.roll();
+      if (player1.roll() === 1) {
+        expect(player1.turnTotal).toEqual(0);
+      }
     }
   });
+
 
   
   test("should add turnTotal score to currentOverallScore if press hold", () => {
