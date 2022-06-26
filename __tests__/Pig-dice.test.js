@@ -52,4 +52,10 @@ describe('PigDice', () => {
     expect(player1.activePlayer).toEqual(1);
   }); 
 
+  test('should add turnTotal to currentOverallScore', () => {
+    player1.roll(5);
+    player1.hold();
+    expect(player1.currentOverallScore).toEqual(5);
+    expect(player1.activePlayer).toEqual(1);
+  });
 });
