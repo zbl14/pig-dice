@@ -1,4 +1,4 @@
-import { PigDice } from './../src/Pig-dice.js';
+import { PigDice } from './../src/js/pig-dice.js';
 
 describe('PigDice', () => {
   let player1, player2
