@@ -11,12 +11,9 @@ PigDice.prototype.roll = function() {
   if (randomNum !== 1) {
     this.diceRoll = randomNum;
     this.turnTotal += randomNum;
-    return this.diceRoll
   } else {
     this.diceRoll = 1;
     this.turnTotal = 0;
-    this.activePlayer = 1;
-    return this.diceRoll
   }
 };
 
@@ -28,8 +25,8 @@ PigDice.prototype.hold = function () {
   return this.currentOverallScore
 };
 
-PigDice.prototype.enable = function() {
-  this.activePlayer = 0;
+PigDice.prototype.switch = function() {
+  this.activePlayer = this.activePlayer === 0 ? 1 : 0;
 };
 
 // player1Instance
