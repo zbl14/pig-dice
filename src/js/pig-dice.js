@@ -16,7 +16,7 @@ export class PigDice {
       this.diceRoll = num;
       this.turnTotal += num;
       if (this.currentOverallScore + this.turnTotal >= 100) {
-        return "You win!"
+        return this.playing = false
       }
     } else {
       this.diceRoll = 1;
@@ -34,11 +34,11 @@ export class PigDice {
     this.switch();
   }
 
-  reset() {
-    this.name = "";
-    this.diceRoll = 0;
-    this.turnTotal = 0;
-    this.currentOverallScore = 0;
-    this.activePlayer = 0;
-  }
+  // reset() {
+  //   this.name = "";
+  //   this.diceRoll = 0;
+  //   this.turnTotal = 0;
+  //   this.currentOverallScore = 0;
+  //   this.activePlayer = 0;
+  // }
 }

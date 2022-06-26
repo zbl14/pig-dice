@@ -66,18 +66,18 @@ describe('PigDice', () => {
     expect(player1.activePlayer).toEqual(1);
   });
 
-  test('should reset name to "" and reset diceRoll, turnTotal, currentOverallScore, activePlayer to 0',() => {
-    player1.roll(5);
-    player1.reset();
-    expect(player1.name).toEqual("");
-    expect(player1.diceRoll).toEqual(0);
-    expect(player1.turnTotal).toEqual(0);
-    expect(player1.currentOverallScore).toEqual(0);
-    expect(player1.activePlayer).toEqual(0);  
-    });
+  // test('should reset name to "" and reset diceRoll, turnTotal, currentOverallScore, activePlayer to 0',() => {
+  //   player1.roll(5);
+  //   player1.reset();
+  //   expect(player1.name).toEqual("");
+  //   expect(player1.diceRoll).toEqual(0);
+  //   expect(player1.turnTotal).toEqual(0);
+  //   expect(player1.currentOverallScore).toEqual(0);
+  //   expect(player1.activePlayer).toEqual(0);  
+  //   });
 
-    test('should return "You win!" when surpass targeted score after a roll', () => {
+    test('should return false when surpass targeted score after a roll', () => {
       player1.currentOverallScore = 95;
-      expect(player1.roll(6)).toEqual("You win!");
+      expect(player1.roll(6)).toEqual(false);
     });
 });
