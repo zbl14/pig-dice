@@ -46,33 +46,10 @@ describe('PigDice', () => {
     expect(player1.diceRoll).toEqual(3);
     expect(player1.turnTotal).toEqual(5);
   });
-  
 
-  test("should add turnTotal score to currentOverallScore if press hold", () => {
-    let player1 = new PigDice ("Player1");
-    player1.hold();
-    if (player1.roll() === 5) {
-      expect(player1.hold()).toEqual(5);
-      expect(player1.turnTotal).toEqual(0);
-    }
-  });
+  test('should return 1 for activePlayer', () => {
+    player1.switch();
+    expect(player1.activePlayer).toEqual(1);
+  }); 
 
-  test("should make activePlayer to 0 for those getting 1", () => {
-    let player1 = new PigDice ("Player1");
-    player1.switch()
-    if (player1.roll() === 1) {
-      player1.switch()
-      expect(player1.activePlayer).toEqual(0);
-    }
-  });
-
-  test("should make activePlayer to 0 for those pressing hold ", () => {
-    let player1 = new PigDice ("Player1");
-    player1.switch()
-    if (player1.roll() !== 1) {
-      player1.hold()
-      player1.switch()
-      expect(player1.activePlayer).toEqual(0);
-    }
-  });
 });
