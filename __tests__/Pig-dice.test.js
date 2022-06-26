@@ -36,9 +36,18 @@ describe('PigDice', () => {
   test('should return 0 for turnTotal, if roll a 2 then roll a 1', () => {
     player1.roll(2);
     player1.roll(1);
+    expect(player1.diceRoll).toEqual(1);
     expect(player1.turnTotal).toEqual(0);
   });
+
+  test('should return 0 for turnTotal, if roll a 2 then roll a 1', () => {
+    player1.roll(2);
+    player1.roll(3);
+    expect(player1.diceRoll).toEqual(3);
+    expect(player1.turnTotal).toEqual(5);
+  });
   
+
   test("should add turnTotal score to currentOverallScore if press hold", () => {
     let player1 = new PigDice ("Player1");
     player1.hold();
