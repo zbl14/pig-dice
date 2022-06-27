@@ -7,7 +7,6 @@ import $ from 'jquery';
 let player1= new PigDice("player1Name");
 let player2 = new PigDice("player2Name");
 player2.activePlayer = 1;
-// let targetedScore = 10;
 
 // function reset() {
 //   let thePlayers = [player1, player2];
@@ -25,7 +24,7 @@ player2.activePlayer = 1;
 //   });
 // }
 
-function disableArea () {
+let activePlayerArea = () => {
   if (player1.activePlayer === 0 && player2.activePlayer === 1) {
     $(".player1-container").addClass("active-player-background");
     $(".player2-container").removeClass("active-player-background");
@@ -33,7 +32,7 @@ function disableArea () {
     $(".player1-container").removeClass("active-player-background");
     $(".player2-container").addClass("active-player-background");
   }
-}
+};
 
 $(document).ready(function() {
   $("form#newPlayer").submit(function(event) {
@@ -48,12 +47,13 @@ $(document).ready(function() {
 
     $(".roll").click(function(){
       if (player1.activePlayer === 0 && player2.activePlayer === 1) {
-        disableArea ();
+        activePlayerArea ();
         player1.roll(player1.randomNum()); 
         $(".player1CurrentRoll").html(player1.diceRoll);
         $(".player1TurnTotal").html(player1.turnTotal);
         if (player1.activePlayer === 1) {
           player2.switch();
+          activePlayerArea ();
         }
         if (player1.playing === false) {
           $("#victory-message-super-container").show();
@@ -61,12 +61,13 @@ $(document).ready(function() {
           // reset();
         } 
       } else {
-        disableArea ();
+        activePlayerArea ();
         player2.roll(player1.randomNum()); 
         $(".player2CurrentRoll").html(player2.diceRoll);
         $(".player2TurnTotal").html(player2.turnTotal);
         if (player2.activePlayer === 1) {
           player1.switch();
+          activePlayerArea ();
         }
         if (player2.playing === false) {
           $("#victory-message-super-container").show();
@@ -80,13 +81,13 @@ $(document).ready(function() {
       if (player1.activePlayer === 0 && player2.activePlayer === 1) {
         player1.hold();
         player2.switch();
-        disableArea ();
+        activePlayerArea ();
         $(".player1OverallScore").html(player1.currentOverallScore);
         console.log(`player1: ${player1.activePlayer}, player2: ${player2.activePlayer}`);
       } else {
         player2.hold();
         player1.switch();
-        disableArea ();
+        activePlayerArea ();
         $(".player2OverallScore").html(player2.currentOverallScore);
         console.log(`player1: ${player1.activePlayer}, player2: ${player2.activePlayer}`); 
       }
@@ -98,7 +99,7 @@ $(document).ready(function() {
 // WIP: computer mode 
 // $(".computer-game-roll").click(function(){
 //   if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
-//     disableArea ()
+//     activePlayerArea ()
 //     player1Instance.roll(); 
 //     $(".player1CurrentRoll").html(player1Instance.diceRoll);
 //     $(".player1TurnTotal").html(player1Instance.turnTotal);
@@ -109,7 +110,7 @@ $(document).ready(function() {
 //       reset();
 //     } 
 //   } else {
-//     disableArea ()
+//     activePlayerArea ()
 //     player2Instance.roll(); 
 //     $(".player2CurrentRoll").html(player2Instance.diceRoll);
 //     $(".player2TurnTotal").html(player2Instance.turnTotal);
