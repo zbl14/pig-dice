@@ -33,12 +33,4 @@ export class PigDice {
     this.currentOverallScore += this.turnTotal;
     this.switch();
   }
-
-  // reset() {
-  //   this.name = "";
-  //   this.diceRoll = 0;
-  //   this.turnTotal = 0;
-  //   this.currentOverallScore = 0;
-  //   this.activePlayer = 0;
-  // }
 }
