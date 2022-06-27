@@ -44,6 +44,8 @@ $(document).ready(function() {
     player2.name = player2Name;
     $(".player1Name").html(player1.name);
     $(".player2Name").html(player2.name);
+    $("input#player1Name").val("");
+    $("input#player2Name").val("");
     $("#newPlayer").hide();
 
     $(".roll").click(function(){
