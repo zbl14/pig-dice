@@ -8,22 +8,22 @@ let player1= new PigDice("player1Name");
 let player2 = new PigDice("player2Name");
 player2.activePlayer = 1;
 
-// function reset() {
-//   let thePlayers = [player1, player2];
-//   thePlayers.forEach(function(player) {
-//     player.name = "";
-//     player.diceRoll = 0;
-//     player.turnTotal = 0;
-//     player.currentOverallScore = 0;
-//     player.playing = true;
-//   });
-//   player1.activePlayer = 0;
-//   player2.activePlayer = 1;
-//   let resetOuput = [$(".player1Name"), $(".player1CurrentRoll"), $(".player1TurnTotal"), $(".player1OverallScore"), $(".player2Name"), $(".player2CurrentRoll"), $(".player2TurnTotal"), $(".player2OverallScore")];
-//   resetOuput.forEach(function(output){
-//     output.html("");
-//   });
-// }
+function reset() {
+  let thePlayers = [player1, player2];
+  thePlayers.forEach(function(player) {
+    player.name = "";
+    player.diceRoll = 0;
+    player.turnTotal = 0;
+    player.currentOverallScore = 0;
+    player.playing = true;
+  });
+  player1.activePlayer = 0;
+  player2.activePlayer = 1;
+  let resetOuput = [$(".player1Name"), $(".player1CurrentRoll"), $(".player1TurnTotal"), $(".player1OverallScore"), $(".player2Name"), $(".player2CurrentRoll"), $(".player2TurnTotal"), $(".player2OverallScore")];
+  resetOuput.forEach(function(output){
+    output.html("");
+  });
+}
 
 let activePlayerArea = () => {
   if (player1.activePlayer === 0 && player2.activePlayer === 1) {
@@ -94,7 +94,8 @@ $(document).ready(function() {
     
     $(".popup-button").click(function(){
       $("#victory-message-super-container").hide();
-      // reset();
+      reset();
+      $("#newPlayer").show();
     });
   });
 });
