@@ -52,6 +52,9 @@ $(document).ready(function() {
         player1.roll(player1.randomNum()); 
         $(".player1CurrentRoll").html(player1.diceRoll);
         $(".player1TurnTotal").html(player1.turnTotal);
+        if (player1.activePlayer === 1) {
+          player2.switch();
+        }
         if (this.playing === false) {
           $("#victory-message-super-container").show();
           $(".winner").text(player1.name);
@@ -62,6 +65,9 @@ $(document).ready(function() {
         player2.roll(player1.randomNum()); 
         $(".player2CurrentRoll").html(player2.diceRoll);
         $(".player2TurnTotal").html(player2.turnTotal);
+        if (player2.activePlayer === 1) {
+          player1.switch();
+        }
         if (this.playing === false) {
           $("#victory-message-super-container").show();
           $(".winner").text(player2.name);
