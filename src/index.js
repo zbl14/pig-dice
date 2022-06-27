@@ -55,7 +55,7 @@ $(document).ready(function() {
         if (player1.activePlayer === 1) {
           player2.switch();
         }
-        if (this.playing === false) {
+        if (player1.playing === false) {
           $("#victory-message-super-container").show();
           $(".winner").text(player1.name);
           // reset();
@@ -68,7 +68,7 @@ $(document).ready(function() {
         if (player2.activePlayer === 1) {
           player1.switch();
         }
-        if (this.playing === false) {
+        if (player2.playing === false) {
           $("#victory-message-super-container").show();
           $(".winner").text(player2.name);
           // reset();
