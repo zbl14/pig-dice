@@ -16,7 +16,7 @@ export class PigDice {
       this.diceRoll = num;
       this.turnTotal += num;
       if (this.currentOverallScore + this.turnTotal >= 100) {
-        return this.playing = false
+        return this.playing = false;
       }
     } else {
       this.diceRoll = 1;
