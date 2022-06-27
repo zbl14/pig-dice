@@ -4,28 +4,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import'./css/styles.css';
 import $ from 'jquery';
 
-let player1Instance = new PigDice("player1Name", "active");
-let player2Instance = new PigDice("player2Name", "inactive");
-let targetedScore = 10;
+let player1= new PigDice("player1Name");
+let player2 = new PigDice("player2Name");
+player2.activePlayer = 1;
+// let targetedScore = 10;
 
-function reset() {
-  let thePlayers = [player1Instance, player2Instance];
-  thePlayers.forEach(function(player) {
-    player.name = "";
-    player.diceRoll = 0;
-    player.turnTotal = 0;
-    player.currentOverallScore = 0;
-  });
-  player1Instance.activePlayer = "active";
-  player2Instance.activePlayer = "inactive";
-  let resetOuput = [$(".player1Name"), $(".player1CurrentRoll"), $(".player1TurnTotal"), $(".player1OverallScore"), $(".player2Name"), $(".player2CurrentRoll"), $(".player2TurnTotal"), $(".player2OverallScore")];
-  resetOuput.forEach(function(output){
-    output.html("");
-  });
-}
+// function reset() {
+//   let thePlayers = [player1, player2];
+//   thePlayers.forEach(function(player) {
+//     player.name = "";
+//     player.diceRoll = 0;
+//     player.turnTotal = 0;
+//     player.currentOverallScore = 0;
+//   });
+//   player1.activePlayer = 0;
+//   player2.activePlayer = 1;
+//   let resetOuput = [$(".player1Name"), $(".player1CurrentRoll"), $(".player1TurnTotal"), $(".player1OverallScore"), $(".player2Name"), $(".player2CurrentRoll"), $(".player2TurnTotal"), $(".player2OverallScore")];
+//   resetOuput.forEach(function(output){
+//     output.html("");
+//   });
+// }
 
 function disableArea () {
-  if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+  if (player1.activePlayer === 0 && player2.activePlayer === 1) {
     $(".player1-container").addClass("active-player-background");
     $(".player2-container").removeClass("active-player-background");
   } else {
@@ -39,49 +40,49 @@ $(document).ready(function() {
     event.preventDefault();
     let player1Name = $("input#player1Name").val();
     let player2Name = $("input#player2Name").val();
-    player1Instance.name = player1Name;
-    player2Instance.name = player2Name;
-    $(".player1Name").html(player1Instance.name);
-    $(".player2Name").html(player2Instance.name);
+    player1.name = player1Name;
+    player2.name = player2Name;
+    $(".player1Name").html(player1.name);
+    $(".player2Name").html(player2.name);
     $("#newPlayer").hide();
 
     $(".roll").click(function(){
-      if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
+      if (player1.activePlayer === 0 && player2.activePlayer === 1) {
         disableArea ();
-        player1Instance.roll(); 
-        $(".player1CurrentRoll").html(player1Instance.diceRoll);
-        $(".player1TurnTotal").html(player1Instance.turnTotal);
-        if (player1Instance.turnTotal+player1Instance.currentOverallScore >= targetedScore) {
-          console.log("You win!");
+        player1.roll(player1.randomNum()); 
+        $(".player1CurrentRoll").html(player1.diceRoll);
+        $(".player1TurnTotal").html(player1.turnTotal);
+        if (this.playing === false) {
           $("#victory-message-super-container").show();
-          $(".winner").text(player1Instance.name);
-          reset();
+          $(".winner").text(player1.name);
+          // reset();
         } 
       } else {
         disableArea ();
-        player2Instance.roll(); 
-        $(".player2CurrentRoll").html(player2Instance.diceRoll);
-        $(".player2TurnTotal").html(player2Instance.turnTotal);
-        if (player2Instance.turnTotal+player2Instance.currentOverallScore >= targetedScore) {
-          console.log("You win!");
+        player2.roll(player1.randomNum()); 
+        $(".player2CurrentRoll").html(player2.diceRoll);
+        $(".player2TurnTotal").html(player2.turnTotal);
+        if (this.playing === false) {
           $("#victory-message-super-container").show();
-          $(".winner").text(player2Instance.name);
-          reset();
+          $(".winner").text(player2.name);
+          // reset();
         } 
       }
     });
 
     $(".hold").click(function(){
-      if (player1Instance.activePlayer === "active" && player2Instance.activePlayer === "inactive") {
-        player1Instance.hold();
+      if (player1.activePlayer === 0 && player2.activePlayer === 1) {
+        player1.hold();
+        player2.switch();
         disableArea ();
-        $(".player1OverallScore").html(player1Instance.currentOverallScore);
-        // player1Instance.switch();
-        console.log(player1Instance.activePlayer, player2Instance.activePlayer);
+        $(".player1OverallScore").html(player1.currentOverallScore);
+        console.log(`player1: ${player1.activePlayer}, player2: ${player2.activePlayer}`);
       } else {
-        player2Instance.hold();
+        player2.hold();
+        player1.switch();
         disableArea ();
-        $(".player2OverallScore").html(player2Instance.currentOverallScore); 
+        $(".player2OverallScore").html(player2.currentOverallScore);
+        console.log(`player1: ${player1.activePlayer}, player2: ${player2.activePlayer}`); 
       }
     });
   });
